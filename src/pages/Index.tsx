@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
@@ -57,12 +58,12 @@ const Index = () => {
           />
           <span className="text-xl md:text-2xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
         </a>
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-shrink-0">
-          <Link to="/shop" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">Shop</Link>
-          <a href="#how" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">How it works</a>
-          <a href="#about" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">About</a>
-        </nav>
-        <div className="flex-shrink-0">
+        <div className="flex items-center gap-4 lg:gap-6">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-shrink-0">
+            <Link to="/shop" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">Shop</Link>
+            <a href="#how" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">How it works</a>
+            <a href="#about" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">About</a>
+          </nav>
           <ThemeToggle />
         </div>
       </header>
@@ -189,3 +190,4 @@ const Index = () => {
 };
 
 export default Index;
+
