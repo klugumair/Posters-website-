@@ -1,5 +1,5 @@
-
 import React from "react";
+import ThemeToggle from "../components/ThemeToggle";
 
 const STEPS = [
   {
@@ -19,6 +19,7 @@ const STEPS = [
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-background text-foreground px-6 py-12">
+      <ThemeToggle />
       {/* Hero */}
       <section className="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
         <img
