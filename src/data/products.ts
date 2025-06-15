@@ -1,4 +1,5 @@
 
+
 export const SHOP_ITEMS = [
   {
     id: 1,
@@ -44,5 +45,78 @@ export const SHOP_ITEMS = [
     desc: "Adorable feline with cosmic background, whimsical art.",
     category: "Animals",
     fullDescription: "A charming tabby cat set against a starry cosmic backdrop. This whimsical piece combines the comfort of our feline friends with the wonder of the universe."
+  },
+  {
+    id: 6,
+    title: "Western Wanderer",
+    img: "/lovable-uploads/4f2e1299-cbbf-460d-a97f-f995e1ce5878.png",
+    price: 12,
+    desc: "Rugged cowboy at sunset, classic frontier spirit.",
+    category: "Western",
+    fullDescription: "A weathered cowboy stands against a dramatic sunset backdrop, embodying the spirit of the American frontier. Perfect for adding a touch of rustic adventure to any space."
+  },
+  {
+    id: 7,
+    title: "Cosmic Artist",
+    img: "/lovable-uploads/c9c1341f-8d13-4539-b653-cc85ab0c1b3a.png",
+    price: 12,
+    desc: "Astronaut painting in space, creative cosmic art.",
+    category: "Space",
+    fullDescription: "An astronaut creates art while floating in the cosmos, surrounded by vibrant nebulas. This inspiring piece celebrates creativity and exploration beyond earthly bounds."
+  },
+  {
+    id: 8,
+    title: "Stellar Voyage",
+    img: "/lovable-uploads/be448d4e-f5fe-47c0-bfda-ea2c57bb70b3.png",
+    price: 12,
+    desc: "Astronaut among shooting stars, epic space adventure.",
+    category: "Space",
+    fullDescription: "A lone astronaut drifts through a field of shooting stars and celestial bodies. This epic artwork captures the grandeur and solitude of space exploration."
+  },
+  {
+    id: 9,
+    title: "Mountain Harmony",
+    img: "/lovable-uploads/cd2091de-f912-487e-af15-9eae86d72584.png",
+    price: 12,
+    desc: "Vibrant mountain landscape with swirling skies.",
+    category: "Nature",
+    fullDescription: "Rolling mountains meet swirling, colorful skies in this harmonious landscape. The warm oranges and cool blues create a perfect balance of energy and tranquility."
+  },
+  {
+    id: 10,
+    title: "Crimson Flow",
+    img: "/lovable-uploads/3eaea018-285a-4ce4-94b6-2e6e2237ba10.png",
+    price: 12,
+    desc: "Abstract red energy waves, dynamic modern art.",
+    category: "Abstract",
+    fullDescription: "Dynamic red energy flows through dark space, creating a mesmerizing abstract composition. This bold artwork adds intensity and movement to any modern interior."
+  },
+  {
+    id: 11,
+    title: "Alpine Serenity",
+    img: "/lovable-uploads/70f4af72-fbc4-4acd-b0bd-d456ceedfe07.png",
+    price: 12,
+    desc: "Peaceful mountain cabin with wildflowers.",
+    category: "Nature",
+    fullDescription: "A charming mountain cabin sits peacefully among wildflowers with majestic peaks in the background. This serene scene evokes feelings of tranquility and escape to nature."
+  },
+  {
+    id: 12,
+    title: "Neon Guardian",
+    img: "/lovable-uploads/c1c14e7f-a947-4bb2-a54d-9f4796c706e9.png",
+    price: 12,
+    desc: "Cyberpunk warrior with glowing sword, futuristic art.",
+    category: "Sci-Fi",
+    fullDescription: "A cyberpunk warrior stands ready with a glowing energy sword, bathed in neon lights. This futuristic artwork brings the excitement of sci-fi adventure to your walls."
+  },
+  {
+    id: 13,
+    title: "Digital Heart",
+    img: "/lovable-uploads/14febdcd-a377-4629-b1d8-b8c68cf9ba31.png",
+    price: 12,
+    desc: "Futuristic anatomical heart with red lights.",
+    category: "Sci-Fi",
+    fullDescription: "A stunning fusion of biology and technology, this digital heart pulses with red energy. Perfect for those who appreciate the intersection of science, art, and futuristic design."
   }
 ];
+
