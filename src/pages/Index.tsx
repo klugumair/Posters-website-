@@ -1,4 +1,3 @@
-
 import React from "react";
 import ThemeToggle from "../components/ThemeToggle";
 
@@ -45,7 +44,7 @@ const Index = () => {
 
       {/* About */}
       <section className="w-full max-w-2xl mx-auto text-center mt-12">
-        <h2 className="text-2xl font-semibold mb-3">Why Bliss Posters?</h2>
+        <h2 className="text-2xl font-semibold mb-3">Why AetherGraphix?</h2>
         <p className="text-md text-muted-foreground">
           From vibrant AI-generated art to fully custom creations, we make posters that bring your walls to life. No templates, no limits—just one-of-a-kind design, made easy.
         </p>
@@ -71,11 +70,10 @@ const Index = () => {
       {/* Contact */}
       <footer className="w-full max-w-2xl mx-auto mt-20 text-center border-t border-border pt-8 text-muted-foreground text-sm">
         <div>Questions? <a href="mailto:aiposters23@gmail.com" className="text-blue-600 hover:underline">aiposters23@gmail.com</a></div>
-        <div className="mt-2 opacity-60">Bliss Posters &copy; {new Date().getFullYear()}</div>
+        <div className="mt-2 opacity-60">AetherGraphix &copy; {new Date().getFullYear()}</div>
       </footer>
     </div>
   );
 };
 
 export default Index;
-
