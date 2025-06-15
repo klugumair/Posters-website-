@@ -1,3 +1,4 @@
+
 import React from "react";
 import ThemeToggle from "../components/ThemeToggle";
 
@@ -29,7 +30,7 @@ const Index = () => {
           draggable={false}
         />
         <h1 className="text-4xl md:text-5xl font-bold mb-2">
-          Bliss Posters
+          AetherGraphix
         </h1>
         <p className="text-xl text-muted-foreground mb-6">
           Custom-designed posters powered by AI or made by hand — unique decor for your space.
@@ -77,3 +78,4 @@ const Index = () => {
 };
 
 export default Index;
+
