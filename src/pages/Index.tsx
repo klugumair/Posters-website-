@@ -23,8 +23,8 @@ const Index = () => {
       {/* Hero */}
       <section className="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
         <img
-          src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80"
-          alt="Colorful abstract AI generated digital art"
+          src="https://i.pinimg.com/736x/e3/87/a2/e387a2fc68928665bd6e68eec840af8a.jpg"
+          alt="Stunning AI art example"
           className="rounded-xl shadow-md mb-8 w-full max-h-72 object-cover"
           draggable={false}
         />
