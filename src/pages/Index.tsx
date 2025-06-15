@@ -1,4 +1,6 @@
+
 import React from "react";
+import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 
 const STEPS = [
@@ -56,7 +58,7 @@ const Index = () => {
           <span className="text-2xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
         </a>
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#shop" className="text-md text-foreground font-medium hover:text-blue-600 transition">Shop</a>
+          <Link to="/shop" className="text-md text-foreground font-medium hover:text-blue-600 transition">Shop</Link>
           <a href="#how" className="text-md text-foreground font-medium hover:text-blue-600 transition">How it works</a>
           <a href="#about" className="text-md text-foreground font-medium hover:text-blue-600 transition">About</a>
           <a href="#contact" className="text-md text-foreground font-medium hover:text-blue-600 transition">Contact</a>
@@ -92,7 +94,15 @@ const Index = () => {
         id="shop"
         className="w-full max-w-5xl mx-auto px-4 py-12 mt-6 md:mt-8 bg-background/90 rounded-lg shadow-inner"
       >
-        <h2 className="text-3xl font-bold text-center mb-6">Shop Featured Prints</h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-3xl font-bold">Shop Featured Prints</h2>
+          <Link 
+            to="/shop" 
+            className="text-blue-600 hover:text-blue-700 font-medium transition"
+          >
+            View All →
+          </Link>
+        </div>
         <div className="grid gap-8 md:grid-cols-3">
           {SHOP_ITEMS.map((item) => (
             <div
