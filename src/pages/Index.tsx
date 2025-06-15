@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
@@ -24,21 +23,21 @@ const SHOP_ITEMS = [
     id: 1,
     title: "Galactic Painter",
     img: "/lovable-uploads/31a7662c-7cae-413d-bf9e-4852bc320833.png",
-    price: "$14",
+    price: "$12",
     desc: "Astronaut in purple nebula, stunning cosmic wall art.",
   },
   {
     id: 2,
     title: "Celestial Portal",
     img: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=400&q=80",
-    price: "$12",
+    price: "$10",
     desc: "Blue starry night poster, surreal & dreamy.",
   },
   {
     id: 3,
     title: "Neon Peaks",
     img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=400&q=80",
-    price: "$13",
+    price: "$11",
     desc: "Futuristic mountain fog print, bold accent for any space.",
   },
 ];
@@ -61,7 +60,6 @@ const Index = () => {
           <Link to="/shop" className="text-md text-foreground font-medium hover:text-blue-600 transition">Shop</Link>
           <a href="#how" className="text-md text-foreground font-medium hover:text-blue-600 transition">How it works</a>
           <a href="#about" className="text-md text-foreground font-medium hover:text-blue-600 transition">About</a>
-          <a href="#contact" className="text-md text-foreground font-medium hover:text-blue-600 transition">Contact</a>
         </nav>
         <ThemeToggle />
       </header>
