@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
@@ -47,21 +48,23 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center bg-background text-foreground px-0 py-0">
       {/* Header with logo & nav */}
       <header className="w-full flex items-center justify-between px-4 md:px-8 py-4 shadow-sm bg-card/70 backdrop-blur fixed top-0 left-0 z-40 border-b border-border">
-        <a href="/" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3 flex-shrink-0">
           <img
             src="/lovable-uploads/31a7662c-7cae-413d-bf9e-4852bc320833.png"
             alt="AetherGraphix Logo"
             className="h-10 w-10 rounded-full shadow object-cover border border-border"
             draggable={false}
           />
-          <span className="text-2xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
+          <span className="text-xl md:text-2xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
         </a>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link to="/shop" className="text-md text-foreground font-medium hover:text-blue-600 transition">Shop</Link>
-          <a href="#how" className="text-md text-foreground font-medium hover:text-blue-600 transition">How it works</a>
-          <a href="#about" className="text-md text-foreground font-medium hover:text-blue-600 transition">About</a>
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-shrink-0">
+          <Link to="/shop" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">Shop</Link>
+          <a href="#how" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">How it works</a>
+          <a href="#about" className="text-sm lg:text-md text-foreground font-medium hover:text-blue-600 transition whitespace-nowrap">About</a>
         </nav>
-        <ThemeToggle />
+        <div className="flex-shrink-0">
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* Spacer to offset fixed header */}
