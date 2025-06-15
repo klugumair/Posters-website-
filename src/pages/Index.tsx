@@ -69,7 +69,7 @@ const Index = () => {
 
       {/* Contact */}
       <footer className="w-full max-w-2xl mx-auto mt-20 text-center border-t border-border pt-8 text-muted-foreground text-sm">
-        <div>Questions? <a href="mailto:hello@blissposters.com" className="text-blue-600 hover:underline">hello@blissposters.com</a></div>
+        <div>Questions? <a href="mailto:aiposters23@gmail.com" className="text-blue-600 hover:underline">aiposters23@gmail.com</a></div>
         <div className="mt-2 opacity-60">Bliss Posters &copy; {new Date().getFullYear()}</div>
       </footer>
     </div>
