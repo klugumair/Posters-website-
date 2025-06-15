@@ -1,4 +1,3 @@
-
 import React from "react";
 import ThemeToggle from "../components/ThemeToggle";
 
@@ -23,21 +22,21 @@ const SHOP_ITEMS = [
     id: 1,
     title: "Galactic Painter",
     img: "/lovable-uploads/31a7662c-7cae-413d-bf9e-4852bc320833.png",
-    price: "$29",
+    price: "$22",
     desc: "Astronaut in purple nebula, stunning cosmic wall art.",
   },
   {
     id: 2,
     title: "Celestial Portal",
     img: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=400&q=80",
-    price: "$25",
+    price: "$18",
     desc: "Blue starry night poster, surreal & dreamy.",
   },
   {
     id: 3,
     title: "Neon Peaks",
     img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=400&q=80",
-    price: "$27",
+    price: "$20",
     desc: "Futuristic mountain fog print, bold accent for any space.",
   },
 ];
@@ -179,4 +178,3 @@ const Index = () => {
 };
 
 export default Index;
-
