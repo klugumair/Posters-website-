@@ -79,8 +79,8 @@ const CheckoutForm = () => {
   };
 
   const subtotal = getTotalPrice();
-  const shipping = 5.99;
-  const tax = subtotal * 0.08;
+  const shipping = 0; // Free shipping
+  const tax = 0; // Free tax
   const total = subtotal + shipping + tax;
 
   return (
@@ -266,11 +266,11 @@ const CheckoutForm = () => {
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>Free</span>
             </div>
             <div className="flex justify-between">
               <span>Tax</span>
-              <span>${tax.toFixed(2)}</span>
+              <span>Free</span>
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
               <span>Total</span>
