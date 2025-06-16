@@ -1,12 +1,17 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, Minus, Trash2 } from "lucide-react";
 import ThemeToggle from "../components/ThemeToggle";
 import { useCart } from "../hooks/useCart";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { cartItems, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -154,7 +159,7 @@ const Cart = () => {
             <div className="space-y-4">
               <button
                 className="w-full px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition shadow-lg"
-                onClick={() => alert("Checkout functionality coming soon!")}
+                onClick={handleCheckout}
               >
                 Proceed to Checkout
               </button>
