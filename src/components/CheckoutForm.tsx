@@ -1,246 +1,89 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
 import { useCart } from "../hooks/useCart";
-import { useToast } from "@/hooks/use-toast";
-
-interface ShippingInfo {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
-
-interface PaymentInfo {
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
-  nameOnCard: string;
-}
+import { Instagram, ExternalLink } from "lucide-react";
 
 const CheckoutForm = () => {
   const navigate = useNavigate();
-  const { cartItems, getTotalPrice, clearCart } = useCart();
-  const { toast } = useToast();
-  
-  const [shippingInfo, setShippingInfo] = useState<ShippingInfo>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "United States"
-  });
+  const { cartItems, getTotalPrice } = useCart();
 
-  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    nameOnCard: ""
-  });
-
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handleShippingChange = (field: keyof ShippingInfo, value: string) => {
-    setShippingInfo(prev => ({ ...prev, [field]: value }));
+  const generateOrderSummary = () => {
+    const orderDetails = cartItems.map(item => 
+      `${item.title} (Qty: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n');
+    
+    const total = getTotalPrice();
+    
+    return `Hi! I'd like to order these items:\n\n${orderDetails}\n\nTotal: $${total.toFixed(2)}`;
   };
 
-  const handlePaymentChange = (field: keyof PaymentInfo, value: string) => {
-    setPaymentInfo(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsProcessing(true);
-
-    // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Show success toast
-    toast({
-      title: "Order Placed Successfully!",
-      description: `Your order for $${getTotalPrice().toFixed(2)} has been confirmed.`,
+  const handleInstagramRedirect = () => {
+    const orderSummary = generateOrderSummary();
+    const encodedMessage = encodeURIComponent(orderSummary);
+    
+    // Open Instagram page in new tab
+    window.open('https://www.instagram.com/aethergraphix/', '_blank');
+    
+    // You could also copy the order details to clipboard for easy pasting
+    navigator.clipboard.writeText(orderSummary).catch(() => {
+      // Fallback if clipboard API fails
+      console.log('Order details:', orderSummary);
     });
-
-    // Clear cart and navigate to success page
-    clearCart();
-    navigate("/order-success");
-    setIsProcessing(false);
   };
 
   const subtotal = getTotalPrice();
-  const shipping = 0; // Free shipping
-  const tax = 0; // Free tax
-  const total = subtotal + shipping + tax;
+  const total = subtotal;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold mb-8">Complete Your Order</h1>
       
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Checkout Form */}
-        <div className="space-y-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Shipping Information */}
-            <div className="bg-card p-6 rounded-lg border">
-              <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    value={shippingInfo.firstName}
-                    onChange={(e) => handleShippingChange("firstName", e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    value={shippingInfo.lastName}
-                    onChange={(e) => handleShippingChange("lastName", e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-4">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={shippingInfo.email}
-                  onChange={(e) => handleShippingChange("email", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="mt-4">
-                <Label htmlFor="address">Address</Label>
-                <Input
-                  id="address"
-                  value={shippingInfo.address}
-                  onChange={(e) => handleShippingChange("address", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div>
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    value={shippingInfo.city}
-                    onChange={(e) => handleShippingChange("city", e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="state">State</Label>
-                  <Input
-                    id="state"
-                    value={shippingInfo.state}
-                    onChange={(e) => handleShippingChange("state", e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 mt-4">
-                <div>
-                  <Label htmlFor="zipCode">ZIP Code</Label>
-                  <Input
-                    id="zipCode"
-                    value={shippingInfo.zipCode}
-                    onChange={(e) => handleShippingChange("zipCode", e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="country">Country</Label>
-                  <Input
-                    id="country"
-                    value={shippingInfo.country}
-                    onChange={(e) => handleShippingChange("country", e.target.value)}
-                    required
-                  />
-                </div>
+        {/* Instagram Contact Section */}
+        <div className="space-y-6">
+          <div className="bg-card p-8 rounded-lg border text-center space-y-6">
+            <div className="flex justify-center">
+              <div className="p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+                <Instagram className="w-8 h-8 text-white" />
               </div>
             </div>
-
-            {/* Payment Information */}
-            <div className="bg-card p-6 rounded-lg border">
-              <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
-              
-              <div className="mb-4">
-                <Label htmlFor="nameOnCard">Name on Card</Label>
-                <Input
-                  id="nameOnCard"
-                  value={paymentInfo.nameOnCard}
-                  onChange={(e) => handlePaymentChange("nameOnCard", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <Label htmlFor="cardNumber">Card Number</Label>
-                <Input
-                  id="cardNumber"
-                  placeholder="1234 5678 9012 3456"
-                  value={paymentInfo.cardNumber}
-                  onChange={(e) => handlePaymentChange("cardNumber", e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="expiryDate">Expiry Date</Label>
-                  <Input
-                    id="expiryDate"
-                    placeholder="MM/YY"
-                    value={paymentInfo.expiryDate}
-                    onChange={(e) => handlePaymentChange("expiryDate", e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="cvv">CVV</Label>
-                  <Input
-                    id="cvv"
-                    placeholder="123"
-                    value={paymentInfo.cvv}
-                    onChange={(e) => handlePaymentChange("cvv", e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+            
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Contact Us on Instagram</h2>
+              <p className="text-muted-foreground">
+                Click the button below to reach out to us on Instagram. Your order details will be copied to your clipboard so you can easily share them with us.
+              </p>
             </div>
 
             <Button 
-              type="submit" 
-              className="w-full py-4 text-lg"
-              disabled={isProcessing}
+              onClick={handleInstagramRedirect}
+              className="w-full py-4 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
             >
-              {isProcessing ? "Processing..." : `Place Order - $${total.toFixed(2)}`}
+              <Instagram className="w-5 h-5 mr-2" />
+              Contact on Instagram
+              <ExternalLink className="w-4 h-4 ml-2" />
             </Button>
-          </form>
+
+            <div className="text-sm text-muted-foreground space-y-2">
+              <p>📋 Your order details will be copied automatically</p>
+              <p>📱 Message us @aethergraphix with your order</p>
+              <p>✨ We'll handle the rest from there!</p>
+            </div>
+          </div>
+
+          <div className="bg-muted/50 p-4 rounded-lg">
+            <h3 className="font-medium mb-2">Order Summary Preview:</h3>
+            <div className="text-sm text-muted-foreground whitespace-pre-line">
+              {generateOrderSummary()}
+            </div>
+          </div>
         </div>
 
         {/* Order Summary */}
         <div className="bg-card p-6 rounded-lg border h-fit">
-          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+          <h2 className="text-xl font-semibold mb-4">Your Order</h2>
           
           <div className="space-y-4 mb-6">
             {cartItems.map((item) => (
@@ -266,11 +109,7 @@ const CheckoutForm = () => {
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>Free</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Tax</span>
-              <span>Free</span>
+              <span>Contact us for details</span>
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
               <span>Total</span>
