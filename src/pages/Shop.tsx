@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
@@ -148,12 +149,12 @@ const Shop = () => {
             <p className="text-muted-foreground mb-6">
               Can't find what you're looking for? Let us create a custom poster just for you.
             </p>
-            <a
-              href="mailto:order@blissposters.com?subject=Custom%20Poster%20Request"
+            <Link
+              to="/custom-order"
               className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white text-lg font-semibold shadow hover:bg-blue-700 transition"
             >
               Order Custom Poster
-            </a>
+            </Link>
           </div>
         </div>
       </main>
