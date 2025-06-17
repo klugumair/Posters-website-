@@ -1,13 +1,23 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useCart } from "../hooks/useCart";
-import { Instagram, ExternalLink } from "lucide-react";
+import { Instagram, ExternalLink, Copy, Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
 
 const CheckoutForm = () => {
   const navigate = useNavigate();
   const { cartItems, getTotalPrice } = useCart();
+  const { toast } = useToast();
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [orderCopied, setOrderCopied] = useState(false);
 
   const generateOrderSummary = () => {
     const orderDetails = cartItems.map(item => 
@@ -19,18 +29,39 @@ const CheckoutForm = () => {
     return `Hi! I'd like to order these items:\n\n${orderDetails}\n\nTotal: $${total.toFixed(2)}`;
   };
 
-  const handleInstagramRedirect = () => {
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setOrderCopied(true);
+      toast({
+        title: "Order details copied!",
+        description: "Your order summary has been copied to clipboard. Now click Instagram to message us!",
+      });
+      setTimeout(() => setOrderCopied(false), 3000);
+      return true;
+    } catch (error) {
+      console.log('Clipboard failed:', error);
+      toast({
+        title: "Clipboard not available",
+        description: "Please manually copy your order details below.",
+        variant: "destructive",
+      });
+      setShowOrderModal(true);
+      return false;
+    }
+  };
+
+  const handleInstagramRedirect = async () => {
     const orderSummary = generateOrderSummary();
-    const encodedMessage = encodeURIComponent(orderSummary);
+    const copied = await copyToClipboard(orderSummary);
     
-    // Open Instagram page in new tab
+    // Always open Instagram regardless of copy success
     window.open('https://www.instagram.com/aethergraphix/', '_blank');
-    
-    // You could also copy the order details to clipboard for easy pasting
-    navigator.clipboard.writeText(orderSummary).catch(() => {
-      // Fallback if clipboard API fails
-      console.log('Order details:', orderSummary);
-    });
+  };
+
+  const handleManualCopy = async () => {
+    const orderSummary = generateOrderSummary();
+    await copyToClipboard(orderSummary);
   };
 
   const subtotal = getTotalPrice();
@@ -51,31 +82,53 @@ const CheckoutForm = () => {
             </div>
             
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Contact Us on Instagram</h2>
+              <h2 className="text-2xl font-semibold">Order via Instagram</h2>
               <p className="text-muted-foreground">
-                Click the button below to reach out to us on Instagram. Your order details will be copied to your clipboard so you can easily share them with us.
+                Complete your order by messaging us on Instagram. We'll copy your order details and open our Instagram page.
               </p>
             </div>
 
-            <Button 
-              onClick={handleInstagramRedirect}
-              className="w-full py-4 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-            >
-              <Instagram className="w-5 h-5 mr-2" />
-              Contact on Instagram
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Button>
+            <div className="space-y-3">
+              <Button 
+                onClick={handleInstagramRedirect}
+                className="w-full py-4 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              >
+                <Instagram className="w-5 h-5 mr-2" />
+                {orderCopied ? "Order Copied! " : "Copy Order & "}Open Instagram
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
 
-            <div className="text-sm text-muted-foreground space-y-2">
-              <p>📋 Your order details will be copied automatically</p>
-              <p>📱 Message us @aethergraphix with your order</p>
-              <p>✨ We'll handle the rest from there!</p>
+              <Button 
+                onClick={handleManualCopy}
+                variant="outline"
+                className="w-full"
+              >
+                {orderCopied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                {orderCopied ? "Copied!" : "Copy Order Details"}
+              </Button>
+            </div>
+
+            <div className="text-sm text-muted-foreground space-y-2 bg-muted/30 p-4 rounded-lg">
+              <p className="font-medium">How it works:</p>
+              <p>1. 📋 Click "Copy Order & Open Instagram"</p>
+              <p>2. 📱 You'll be taken to our Instagram page</p>
+              <p>3. 💬 Send us a message and paste your order details</p>
+              <p>4. ✨ We'll confirm your order and arrange payment!</p>
             </div>
           </div>
 
           <div className="bg-muted/50 p-4 rounded-lg">
-            <h3 className="font-medium mb-2">Order Summary Preview:</h3>
-            <div className="text-sm text-muted-foreground whitespace-pre-line">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-medium">Your Order Details:</h3>
+              <Button 
+                onClick={handleManualCopy}
+                variant="ghost"
+                size="sm"
+              >
+                <Copy className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="text-sm text-muted-foreground whitespace-pre-line bg-background p-3 rounded border select-all">
               {generateOrderSummary()}
             </div>
           </div>
@@ -118,6 +171,40 @@ const CheckoutForm = () => {
           </div>
         </div>
       </div>
+
+      {/* Order Details Modal */}
+      <Dialog open={showOrderModal} onOpenChange={setShowOrderModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Your Order Details</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Copy the order details below and paste them when messaging us on Instagram:
+            </p>
+            <div className="bg-muted p-4 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap select-all">{generateOrderSummary()}</pre>
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={handleManualCopy} className="flex-1">
+                <Copy className="w-4 h-4 mr-2" />
+                Copy Details
+              </Button>
+              <Button 
+                onClick={() => {
+                  window.open('https://www.instagram.com/aethergraphix/', '_blank');
+                  setShowOrderModal(false);
+                }}
+                variant="outline"
+                className="flex-1"
+              >
+                <Instagram className="w-4 h-4 mr-2" />
+                Open Instagram
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
