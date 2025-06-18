@@ -1,16 +1,17 @@
+
 import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, ShoppingCart, Plus, Minus } from "lucide-react";
 import ThemeToggle from "../components/ThemeToggle";
 import { useCart } from "../hooks/useCart";
-import { SHOP_ITEMS } from "../data/products";
+import { products } from "../data/products";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, cartItems } = useCart();
 
-  const product = SHOP_ITEMS.find(item => item.id === parseInt(id || '0'));
+  const product = products.find(item => item.id === parseInt(id || '0'));
 
   if (!product) {
     return (
@@ -28,9 +29,9 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     addToCart({
       id: product.id,
-      title: product.title,
+      title: product.name,
       price: product.price,
-      img: product.img
+      img: product.image
     });
   };
 
@@ -39,7 +40,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* Header */}
-      <header className="w-full flex items-center justify-between px-4 md:px-8 py-4 shadow-sm bg-card/70 backdrop-blur border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 bg-card/80 backdrop-blur-md border-b border-border shadow-sm">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => navigate(-1)}
@@ -77,14 +78,14 @@ const ProductDetail = () => {
       </header>
 
       {/* Product Detail */}
-      <main className="flex-1 px-4 py-8">
+      <main className="flex-1 px-4 py-8 pt-24">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Product Image */}
             <div className="bg-card rounded-xl overflow-hidden shadow-lg">
               <img
-                src={product.img}
-                alt={product.title}
+                src={product.image}
+                alt={product.name}
                 className="w-full h-96 md:h-full object-cover"
               />
             </div>
@@ -97,7 +98,7 @@ const ProductDetail = () => {
                 </span>
               </div>
               
-              <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
+              <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
               
               <p className="text-muted-foreground text-lg mb-6">
                 {product.fullDescription}
