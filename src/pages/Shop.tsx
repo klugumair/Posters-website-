@@ -1,42 +1,42 @@
 
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ShoppingCart } from "lucide-react";
-import ThemeToggle from "../components/ThemeToggle";
+import { Link } from "react-router-dom";
+import { ArrowLeft, ShoppingCart, Star, Plus } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { products } from "../data/products";
 import { useCart } from "../hooks/useCart";
-import { SHOP_ITEMS } from "../data/products";
+import { useToast } from "@/hooks/use-toast";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Shop = () => {
-  const navigate = useNavigate();
   const { addToCart, cartItems } = useCart();
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const categories = ["All", ...Array.from(new Set(SHOP_ITEMS.map(item => item.category)))];
-  
-  const filteredItems = selectedCategory === "All" 
-    ? SHOP_ITEMS 
-    : SHOP_ITEMS.filter(item => item.category === selectedCategory);
-
-  const handleProductClick = (productId: number) => {
-    navigate(`/product/${productId}`);
-  };
-
-  const handleAddToCart = (item: typeof SHOP_ITEMS[0], e: React.MouseEvent) => {
-    e.stopPropagation();
-    addToCart({
-      id: item.id,
-      title: item.title,
-      price: item.price,
-      img: item.img
-    });
-  };
+  const { toast } = useToast();
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  const getQuantity = (productId: number) => quantities[productId] || 1;
+
+  const setQuantity = (productId: number, quantity: number) => {
+    setQuantities(prev => ({
+      ...prev,
+      [productId]: Math.max(1, quantity)
+    }));
+  };
+
+  const handleAddToCart = (product: any) => {
+    const quantity = getQuantity(product.id);
+    addToCart(product, quantity);
+    toast({
+      title: "Added to cart",
+      description: `${quantity} x ${product.name} added to your cart.`,
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      {/* Header */}
-      <header className="w-full flex items-center justify-between px-4 md:px-8 py-4 shadow-sm bg-card/70 backdrop-blur border-b border-border">
+      {/* Floating Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 bg-card/80 backdrop-blur-md border-b border-border shadow-sm">
         <div className="flex items-center gap-4">
           <Link 
             to="/" 
@@ -74,87 +74,89 @@ const Shop = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Shop Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Shop Our Collection</h1>
+      <main className="flex-1 px-4 py-8 pt-24">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Premium Poster Collection</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discover unique AI-generated and custom-designed posters to transform your space.
+              Discover our curated collection of high-quality posters to transform your space
             </p>
           </div>
 
-          {/* Category Filter */}
-          <div className="mb-8">
-            <div className="flex flex-wrap justify-center gap-2">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                    selectedCategory === category
-                      ? "bg-blue-600 text-white"
-                      : "bg-card text-foreground hover:bg-blue-600/10 border"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+          {/* Custom Order Section */}
+          <div className="mb-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-8 text-center">
+            <h2 className="text-2xl font-bold text-white mb-4">Want Something Custom?</h2>
+            <p className="text-white/90 mb-6">
+              Create your own personalized poster with your images and our professional design touch
+            </p>
+            <Link to="/custom-order">
+              <Button className="bg-white text-purple-600 hover:bg-gray-100 font-semibold">
+                <Plus className="w-4 h-4 mr-2" />
+                Order Custom Poster
+              </Button>
+            </Link>
           </div>
 
           {/* Products Grid */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                className="bg-card flex flex-col rounded-xl overflow-hidden shadow hover:shadow-lg hover-scale transition duration-200 group border cursor-pointer"
-                onClick={() => handleProductClick(item.id)}
-              >
-                <div className="relative">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">
-                      {item.category}
-                    </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => (
+              <div key={product.id} className="bg-card rounded-lg shadow border overflow-hidden hover:shadow-lg transition-shadow">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                  <p className="text-muted-foreground mb-4">{product.description}</p>
+                  
+                  <div className="flex items-center mb-4">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <span className="ml-2 text-sm text-muted-foreground">(4.9)</span>
                   </div>
-                </div>
-                <div className="flex flex-col flex-1 p-6 justify-between">
-                  <div>
-                    <div className="text-xl font-semibold mb-2">{item.title}</div>
-                    <div className="text-muted-foreground text-sm mb-4">{item.desc}</div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl font-bold text-blue-600">${product.price}</span>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setQuantity(product.id, getQuantity(product.id) - 1)}
+                      >
+                        -
+                      </Button>
+                      <span className="w-8 text-center">{getQuantity(product.id)}</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setQuantity(product.id, getQuantity(product.id) + 1)}
+                      >
+                        +
+                      </Button>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-2xl text-blue-600">${item.price}</span>
-                    <button
-                      className="px-6 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700 text-sm font-medium transition"
-                      onClick={(e) => handleAddToCart(item, e)}
+
+                  <div className="space-y-2">
+                    <Button 
+                      className="w-full"
+                      onClick={() => handleAddToCart(product)}
                     >
                       Add to Cart
-                    </button>
+                    </Button>
+                    <Link to={`/product/${product.id}`}>
+                      <Button variant="outline" className="w-full">
+                        View Details
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Call to Action */}
-          <div className="text-center mt-16 bg-card rounded-xl p-8 border">
-            <h2 className="text-2xl font-bold mb-4">Want Something Custom?</h2>
-            <p className="text-muted-foreground mb-6">
-              Can't find what you're looking for? Let us create a custom poster just for you.
-            </p>
-            <Link
-              to="/custom-order"
-              className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white text-lg font-semibold shadow hover:bg-blue-700 transition"
-            >
-              Order Custom Poster
-            </Link>
           </div>
         </div>
       </main>

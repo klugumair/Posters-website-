@@ -24,6 +24,7 @@ const CustomOrder = () => {
   const [description, setDescription] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
+  const [orderCopied, setOrderCopied] = useState(false);
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -56,6 +57,7 @@ const CustomOrder = () => {
     
     try {
       await navigator.clipboard.writeText(orderSummary);
+      setOrderCopied(true);
       toast({
         title: "Order details copied!",
         description: "Your custom order details have been copied. Now opening Instagram to message us!",
@@ -84,6 +86,7 @@ const CustomOrder = () => {
     
     try {
       await navigator.clipboard.writeText(orderSummary);
+      setOrderCopied(true);
       toast({
         title: "Order summary copied!",
         description: "The order details have been copied to your clipboard.",
@@ -101,8 +104,8 @@ const CustomOrder = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      {/* Header */}
-      <header className="w-full flex items-center justify-between px-4 md:px-8 py-4 shadow-sm bg-card/70 backdrop-blur border-b border-border">
+      {/* Floating Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 bg-card/80 backdrop-blur-md border-b border-border shadow-sm">
         <div className="flex items-center gap-4">
           <Link 
             to="/shop" 
@@ -140,7 +143,7 @@ const CustomOrder = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 px-4 py-8">
+      <main className="flex-1 px-4 py-8 pt-24">
         <div className="max-w-4xl mx-auto">
           {/* Page Header */}
           <div className="text-center mb-8">
@@ -272,7 +275,7 @@ const CustomOrder = () => {
                       className="w-full bg-white text-purple-600 hover:bg-gray-100"
                     >
                       <Instagram className="w-4 h-4 mr-2" />
-                      Contact Us on Instagram
+                      {orderCopied ? "Order Copied! Contact Instagram" : "Contact Us on Instagram"}
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
