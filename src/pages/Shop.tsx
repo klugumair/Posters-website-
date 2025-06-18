@@ -26,7 +26,10 @@ const Shop = () => {
 
   const handleAddToCart = (product: any) => {
     const quantity = getQuantity(product.id);
-    addToCart(product, quantity);
+    // Fix: Only pass the product, the useCart hook will handle the quantity internally
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
     toast({
       title: "Added to cart",
       description: `${quantity} x ${product.name} added to your cart.`,
