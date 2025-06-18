@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Upload, Instagram, ExternalLink, X, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Instagram, ExternalLink, ShoppingCart, Copy } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
@@ -11,37 +11,21 @@ import ThemeToggle from "../components/ThemeToggle";
 import { useCart } from "../hooks/useCart";
 
 const POSTER_SIZES = [
-  { id: "small", name: "Small (11x14 inches)", price: 15 },
-  { id: "medium", name: "Medium (16x20 inches)", price: 25 },
-  { id: "large", name: "Large (18x24 inches)", price: 35 },
-  { id: "xlarge", name: "Extra Large (24x36 inches)", price: 50 }
+  { id: "small", name: "Small (11x14 inches)", price: 12 },
+  { id: "medium", name: "Medium (16x20 inches)", price: 15 },
+  { id: "large", name: "Large (18x24 inches)", price: 20 },
+  { id: "xlarge", name: "Extra Large (24x36 inches)", price: 25 }
 ];
 
 const CustomOrder = () => {
   const { toast } = useToast();
   const { cartItems } = useCart();
   const [selectedSize, setSelectedSize] = useState<string>("");
-  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
   const [description, setDescription] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length > 0) {
-      setUploadedImages(prev => [...prev, ...files]);
-      toast({
-        title: "Images uploaded!",
-        description: `${files.length} image(s) added to your custom order.`,
-      });
-    }
-  };
-
-  const removeImage = (index: number) => {
-    setUploadedImages(prev => prev.filter((_, i) => i !== index));
-  };
 
   const generateCustomOrderSummary = () => {
     const selectedSizeInfo = POSTER_SIZES.find(size => size.id === selectedSize);
@@ -52,10 +36,10 @@ const CustomOrder = () => {
       `Size: ${selectedSizeInfo?.name || "Not selected"}`,
       `Price: $${selectedSizeInfo?.price || 0}`,
       `Description: ${description || "No description provided"}`,
-      `Number of images: ${uploadedImages.length}`
+      `Images: Will be sent in Instagram conversation`
     ].join('\n');
     
-    return `Hi! I'd like to order a custom poster:\n\n${orderDetails}\n\nI will send the images separately in our conversation.`;
+    return `Hi! I'd like to order a custom poster:\n\n${orderDetails}\n\nI will send the images in our Instagram conversation.`;
   };
 
   const handleInstagramContact = async () => {
@@ -84,6 +68,33 @@ const CustomOrder = () => {
     }
 
     window.open('https://www.instagram.com/aethergraphix/', '_blank');
+  };
+
+  const handleCopyOrderSummary = async () => {
+    if (!selectedSize || !customerName || !customerEmail) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all required fields to copy the order summary.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const orderSummary = generateCustomOrderSummary();
+    
+    try {
+      await navigator.clipboard.writeText(orderSummary);
+      toast({
+        title: "Order summary copied!",
+        description: "The order details have been copied to your clipboard.",
+      });
+    } catch (error) {
+      toast({
+        title: "Copy failed",
+        description: "Please select and copy the text manually.",
+        variant: "destructive",
+      });
+    }
   };
 
   const selectedSizeInfo = POSTER_SIZES.find(size => size.id === selectedSize);
@@ -135,7 +146,7 @@ const CustomOrder = () => {
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Custom Poster Order</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Upload your own images and create a personalized poster that's uniquely yours.
+              Create a personalized poster that's uniquely yours by providing your details and sending us your images via Instagram.
             </p>
           </div>
 
@@ -195,50 +206,23 @@ const CustomOrder = () => {
                 </div>
               </div>
 
-              {/* Image Upload */}
+              {/* Image Instructions */}
               <div className="bg-card p-6 rounded-lg border">
-                <h2 className="text-xl font-semibold mb-4">Upload Your Images</h2>
+                <h2 className="text-xl font-semibold mb-4">Your Images</h2>
                 
                 <div className="space-y-4">
                   <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
-                    <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                    <Instagram className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">Send Images via Instagram</h3>
                     <p className="text-muted-foreground mb-4">
-                      Drag and drop your images here, or click to browse
+                      Your images will be sent personally through our Instagram conversation after you contact us. This ensures the best quality and direct communication for your custom order.
                     </p>
-                    <Input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="max-w-xs mx-auto"
-                    />
-                  </div>
-
-                  {uploadedImages.length > 0 && (
-                    <div className="space-y-2">
-                      <h3 className="font-medium">Uploaded Images ({uploadedImages.length})</h3>
-                      <div className="grid grid-cols-2 gap-2">
-                        {uploadedImages.map((file, index) => (
-                          <div key={index} className="relative group">
-                            <img
-                              src={URL.createObjectURL(file)}
-                              alt={`Upload ${index + 1}`}
-                              className="w-full h-24 object-cover rounded border"
-                            />
-                            <button
-                              onClick={() => removeImage(index)}
-                              className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
-                            >
-                              <X size={12} />
-                            </button>
-                            <p className="text-xs text-muted-foreground mt-1 truncate">
-                              {file.name}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="bg-muted/30 p-4 rounded-lg">
+                      <p className="text-sm text-muted-foreground">
+                        💡 <strong>Tip:</strong> Prepare your high-quality images (JPG, PNG) and send them to us via Instagram DM along with your order details.
+                      </p>
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -307,7 +291,18 @@ const CustomOrder = () => {
               {/* Order Summary Preview */}
               {(customerName || customerEmail || selectedSize) && (
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <h3 className="font-medium mb-2">Order Summary Preview:</h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium">Order Summary Preview:</h3>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleCopyOrderSummary}
+                      className="flex items-center gap-2"
+                    >
+                      <Copy className="w-4 h-4" />
+                      Copy
+                    </Button>
+                  </div>
                   <div className="text-sm text-muted-foreground whitespace-pre-line bg-background p-3 rounded border select-all">
                     {generateCustomOrderSummary()}
                   </div>
