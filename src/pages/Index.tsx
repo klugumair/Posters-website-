@@ -1,11 +1,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Star, ChevronRight } from "lucide-react";
+import { ShoppingCart, Star, ChevronRight, Instagram, Mail } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { products } from "../data/products";
 import { useCart } from "../hooks/useCart";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Index = () => {
   const { cartItems } = useCart();
@@ -43,7 +42,6 @@ const Index = () => {
             )}
             <span className="hidden md:inline text-sm font-medium">Cart</span>
           </Link>
-          <ThemeToggle />
         </div>
       </header>
 
@@ -149,7 +147,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-12 px-4 bg-card border-t">
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-6">
             <img
               src="/lovable-uploads/31a7662c-7cae-413d-bf9e-4852bc320833.png"
@@ -159,15 +157,50 @@ const Index = () => {
             />
             <span className="text-xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
           </div>
-          <p className="text-muted-foreground mb-6">
-            Transforming spaces with exceptional art and design.
+          
+          {/* Contact Information */}
+          <div className="text-center mb-8">
+            <h3 className="text-lg font-semibold mb-4">📞 Get in Touch</h3>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-muted-foreground">
+              <a 
+                href="https://instagram.com/aipsoters23" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-pink-500 transition-colors"
+              >
+                <Instagram size={20} />
+                <span>📸 Follow us @aipsoters23</span>
+              </a>
+              
+              <a 
+                href="https://wa.me/923349261882" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-green-500 transition-colors"
+              >
+                <span className="text-lg">💬</span>
+                <span>WhatsApp: +92 334 926 1882</span>
+              </a>
+              
+              <a 
+                href="mailto:aipsoters23@gmail.com"
+                className="flex items-center gap-2 hover:text-blue-500 transition-colors"
+              >
+                <Mail size={20} />
+                <span>✉️ aipsoters23@gmail.com</span>
+              </a>
+            </div>
+          </div>
+
+          <p className="text-muted-foreground mb-6 text-center">
+            🌟 Transforming spaces with exceptional art and design 🌟
           </p>
           <div className="flex justify-center gap-8 mb-6">
             <Link to="/shop" className="text-muted-foreground hover:text-foreground transition">Shop</Link>
             <a href="#about" className="text-muted-foreground hover:text-foreground transition">About</a>
             <Link to="/custom-order" className="text-muted-foreground hover:text-foreground transition">Custom Orders</Link>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground text-center">
             © 2024 AetherGraphix. All rights reserved.
           </p>
         </div>

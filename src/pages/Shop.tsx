@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ShoppingCart, Star, Plus } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
 import { products } from "../data/products";
 import { useCart } from "../hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Shop = () => {
   const { addToCart, cartItems } = useCart();
@@ -77,7 +77,6 @@ const Shop = () => {
             )}
             <span className="hidden md:inline text-sm font-medium">Cart</span>
           </Link>
-          <ThemeToggle />
         </div>
       </header>
 
@@ -110,11 +109,19 @@ const Shop = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => (
               <div key={product.id} className="bg-card rounded-lg shadow border overflow-hidden hover:shadow-lg transition-shadow">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-80 object-cover"
-                />
+                <div className="relative">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-80 object-cover"
+                  />
+                  <Badge 
+                    variant="secondary" 
+                    className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm"
+                  >
+                    {product.category}
+                  </Badge>
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                   <p className="text-muted-foreground mb-4">{product.description}</p>

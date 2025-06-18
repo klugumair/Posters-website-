@@ -177,7 +177,7 @@ export const products = [
     image: "/lovable-uploads/afbdff22-ca4c-46a7-ba86-64ebb40cd9d6.png",
     price: 12,
     description: "Glowing jellyfish with fiery orange tentacles.",
-    category: "Nature",
+    category: "Animals",
     fullDescription: "A magnificent jellyfish floats through dark waters, its translucent body and flowing tentacles glowing with warm orange light. This mesmerizing piece brings oceanic wonder to any space."
   },
   {
@@ -206,6 +206,51 @@ export const products = [
     description: "Iconic moai statues at golden hour.",
     category: "Historic",
     fullDescription: "The mysterious moai statues of Easter Island stand sentinel in golden light, their ancient faces gazing across the landscape. This iconic scene connects us to one of history's greatest mysteries."
+  },
+  {
+    id: 24,
+    name: "Cyber Survivor",
+    image: "/lovable-uploads/98952d88-2d0f-4276-b965-187d6f9b774f.png",
+    price: 12,
+    description: "Post-apocalyptic warrior in futuristic cityscape.",
+    category: "Sci-Fi",
+    fullDescription: "A determined survivor stands amid the ruins of a futuristic city, embodying resilience in a post-apocalyptic world. Perfect for fans of cyberpunk and dystopian aesthetics."
+  },
+  {
+    id: 25,
+    name: "Enchanted Forest",
+    image: "/lovable-uploads/e418419a-5215-4683-905a-2238ef85cfe7.png",
+    price: 12,
+    description: "Magical forest with glowing crystals and ethereal light.",
+    category: "Fantasy",
+    fullDescription: "A mystical forest illuminated by glowing crystals and ethereal beams of light. This enchanting artwork brings the magic of fantasy realms into your space."
+  },
+  {
+    id: 26,
+    name: "Wings of Freedom",
+    image: "/lovable-uploads/a6caa685-7165-4c28-a25e-57c7b34eed7f.png",
+    price: 12,
+    description: "Anime-inspired poster with dramatic character portraits.",
+    category: "Anime",
+    fullDescription: "A striking anime-inspired composition featuring dramatic character portraits and symbolic elements. Perfect for fans of Japanese animation and manga aesthetics."
+  },
+  {
+    id: 27,
+    name: "Midnight Drive",
+    image: "/lovable-uploads/3f6f3bb4-4534-428a-9b4b-40d3160656a6.png",
+    price: 12,
+    description: "Mysterious car journey through dark forest road.",
+    category: "Atmospheric",
+    fullDescription: "A lone car navigates through a mysterious forest road under moonlight. This atmospheric piece captures the solitude and mystery of nighttime journeys."
+  },
+  {
+    id: 28,
+    name: "Neon Pathway",
+    image: "/lovable-uploads/1658a4e3-8ce7-4ae7-947c-b599764dfbc9.png",
+    price: 12,
+    description: "Futuristic tunnel with glowing geometric frames.",
+    category: "Sci-Fi",
+    fullDescription: "A mesmerizing tunnel lined with glowing geometric frames creates a portal to the future. This striking piece combines minimalist design with sci-fi aesthetics."
   }
 ];
 
