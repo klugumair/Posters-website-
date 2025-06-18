@@ -1,3 +1,4 @@
+
 export const products = [
   {
     id: 1,
@@ -115,6 +116,96 @@ export const products = [
     description: "Futuristic anatomical heart with red lights.",
     category: "Sci-Fi",
     fullDescription: "A stunning fusion of biology and technology, this digital heart pulses with red energy. Perfect for those who appreciate the intersection of science, art, and futuristic design."
+  },
+  {
+    id: 14,
+    name: "Harbor Haven",
+    image: "/lovable-uploads/406a5032-1e93-49d7-8445-22e6a62c1fd7.png",
+    price: 12,
+    description: "Historic harbor scene with sailing boats and colorful buildings.",
+    category: "Historic",
+    fullDescription: "A charming historic harbor comes to life with traditional sailing boats moored between vibrant waterfront buildings. This nostalgic piece captures the romance of maritime life."
+  },
+  {
+    id: 15,
+    name: "Misty Romance",
+    image: "/lovable-uploads/62eb798d-a587-462a-8fe1-57bcc6d3ba01.png",
+    price: 12,
+    description: "Romantic couple by misty waterfront, intimate atmosphere.",
+    category: "Romance",
+    fullDescription: "Two figures share an intimate moment by a misty waterfront as warm light glows from nearby windows. This evocative piece captures the beauty of quiet romantic moments."
+  },
+  {
+    id: 16,
+    name: "Coastal Elegance",
+    image: "/lovable-uploads/df678ac1-5626-4b65-a403-58f260f3b3dc.png",
+    price: 12,
+    description: "Stunning coastal golf course with dramatic cliffs.",
+    category: "Nature",
+    fullDescription: "A pristine golf course perched on dramatic coastal cliffs with the ocean stretching to the horizon. This elegant landscape combines luxury and natural beauty."
+  },
+  {
+    id: 17,
+    name: "Cybernetic Drive",
+    image: "/lovable-uploads/fcb3224f-9dda-4e1d-a89a-c3cf79c0ca1d.png",
+    price: 12,
+    description: "Futuristic car interior with glowing cybernetic arm.",
+    category: "Sci-Fi",
+    fullDescription: "A cybernetic arm grips the gear shift in a high-tech vehicle interior, glowing with neon energy. This piece perfectly captures the fusion of human and machine in a cyberpunk future."
+  },
+  {
+    id: 18,
+    name: "Prairie Rider",
+    image: "/lovable-uploads/1d984247-e008-4728-bd75-8a9005493c4f.png",
+    price: 12,
+    description: "Classic western scene with cowboy on horseback.",
+    category: "Western",
+    fullDescription: "A lone cowboy surveys the vast prairie from horseback under dramatic skies. This timeless western scene embodies the spirit of frontier adventure and freedom."
+  },
+  {
+    id: 19,
+    name: "Aquatic Burst",
+    image: "/lovable-uploads/42f3fd93-2b6e-4cf3-8470-21b02198cd49.png",
+    price: 12,
+    description: "Underwater explosion of light and coral.",
+    category: "Nature",
+    fullDescription: "Sunlight bursts through ocean water creating a spectacular display above vibrant coral formations. This dynamic underwater scene captures the raw energy and beauty of marine life."
+  },
+  {
+    id: 20,
+    name: "Fire Jellyfish",
+    image: "/lovable-uploads/afbdff22-ca4c-46a7-ba86-64ebb40cd9d6.png",
+    price: 12,
+    description: "Glowing jellyfish with fiery orange tentacles.",
+    category: "Nature",
+    fullDescription: "A magnificent jellyfish floats through dark waters, its translucent body and flowing tentacles glowing with warm orange light. This mesmerizing piece brings oceanic wonder to any space."
+  },
+  {
+    id: 21,
+    name: "Alpine Refuge",
+    image: "/lovable-uploads/9e6f87c1-7349-4d4e-9c08-751ee13c9027.png",
+    price: 12,
+    description: "Mountain cabin surrounded by wildflowers and peaks.",
+    category: "Nature",
+    fullDescription: "A rustic mountain cabin nestled among wildflowers with towering snow-capped peaks in the background. This peaceful alpine scene evokes feelings of solitude and natural beauty."
+  },
+  {
+    id: 22,
+    name: "Neon Streets",
+    image: "/lovable-uploads/e6f7c63b-d414-4995-8d18-8e29fe14d45d.png",
+    price: 12,
+    description: "Cyberpunk city street with neon signs and rain.",
+    category: "Cyberpunk",
+    fullDescription: "A rain-soaked street reflects the glow of neon signs in a futuristic cityscape. This atmospheric cyberpunk scene captures the mood of a high-tech urban future."
+  },
+  {
+    id: 23,
+    name: "Easter Island Guardians",
+    image: "/lovable-uploads/268cd8b5-e140-40d7-9c17-db150dff0f17.png",
+    price: 12,
+    description: "Iconic moai statues at golden hour.",
+    category: "Historic",
+    fullDescription: "The mysterious moai statues of Easter Island stand sentinel in golden light, their ancient faces gazing across the landscape. This iconic scene connects us to one of history's greatest mysteries."
   }
 ];
 

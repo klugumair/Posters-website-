@@ -28,7 +28,12 @@ const Shop = () => {
     const quantity = getQuantity(product.id);
     // Fix: Only pass the product, the useCart hook will handle the quantity internally
     for (let i = 0; i < quantity; i++) {
-      addToCart(product);
+      addToCart({
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        img: product.image
+      });
     }
     toast({
       title: "Added to cart",
@@ -108,7 +113,7 @@ const Shop = () => {
                 <img 
                   src={product.image} 
                   alt={product.name}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-80 object-cover"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
