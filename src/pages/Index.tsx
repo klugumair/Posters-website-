@@ -163,13 +163,13 @@ const Index = () => {
             <h3 className="text-lg font-semibold mb-4">📞 Get in Touch</h3>
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-muted-foreground">
               <a 
-                href="https://instagram.com/aipsoters23" 
+                href="https://www.instagram.com/aethergraphix/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-pink-500 transition-colors"
               >
                 <Instagram size={20} />
-                <span>📸 Follow us @aipsoters23</span>
+                <span>📸 Follow us @aethergraphix</span>
               </a>
               
               <a 
