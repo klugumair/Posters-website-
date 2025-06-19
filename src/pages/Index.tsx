@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Star, ChevronRight, Instagram, Mail } from "lucide-react";
@@ -14,7 +13,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* Floating Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 bg-card/80 backdrop-blur-md border-b border-border shadow-sm">
+      <header className="fixed top-4 left-4 right-4 z-50 flex items-center justify-between px-6 md:px-8 py-4 bg-card/80 backdrop-blur-md border border-border shadow-sm rounded-full">
         <Link to="/" className="flex items-center gap-3">
           <img
             src="/lovable-uploads/31a7662c-7cae-413d-bf9e-4852bc320833.png"
@@ -24,12 +23,12 @@ const Index = () => {
           />
           <span className="text-xl font-extrabold font-mono tracking-tight">AetherGraphix</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-foreground hover:text-blue-600 transition font-medium">Home</Link>
-          <Link to="/shop" className="text-foreground hover:text-blue-600 transition font-medium">Shop</Link>
-          <a href="#about" className="text-foreground hover:text-blue-600 transition font-medium">About</a>
-        </nav>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
+            <Link to="/" className="text-foreground hover:text-blue-600 transition font-medium">Home</Link>
+            <Link to="/shop" className="text-foreground hover:text-blue-600 transition font-medium">Shop</Link>
+            <a href="#about" className="text-foreground hover:text-blue-600 transition font-medium">About</a>
+          </nav>
           <Link 
             to="/cart" 
             className="relative flex items-center gap-2 text-foreground hover:text-blue-600 transition"
@@ -46,7 +45,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 text-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950">
+      <section className="pt-32 pb-16 px-4 text-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             AetherGraphix
